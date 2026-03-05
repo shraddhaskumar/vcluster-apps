@@ -9,6 +9,15 @@ spec:
     repoURL: https://helm.goharbor.io
     chart: harbor
     targetRevision: 1.13.0
+    helm:
+      releaseName: harbor
+      parameters:
+        - name: expose.type
+          value: nodePort
+        - name: externalURL
+          value: http://harbor.local
+        - name: expose.tls.auto.commonName
+          value: harbor.local
   destination:
     server: https://kubernetes.default.svc
     namespace: harbor
@@ -18,4 +27,4 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
-      - ServerSideApply=true  
+      - ServerSideApply=true

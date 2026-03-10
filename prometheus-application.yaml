@@ -12,7 +12,7 @@ spec:
     helm:
       releaseName: prometheus
       values: |
-        nodeExporter:
+        prometheus-node-exporter:
           enabled: false
         alertmanager:
           enabled: false

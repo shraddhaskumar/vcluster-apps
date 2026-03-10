@@ -10,14 +10,25 @@ spec:
     chart: harbor
     targetRevision: 1.13.0
     helm:
-      releaseName: harbor
-      parameters:
-        - name: expose.type
-          value: nodePort
-        - name: externalURL
-          value: http://harbor.local
-        - name: expose.tls.auto.commonName
-          value: harbor.local
+      valuesObject:
+        expose:
+          type: nodePort
+          tls:
+            enabled: false
+        externalURL: http://harbor.local
+        harborAdminPassword: "Harbor12345"
+        core:
+          secret: "coresecretvalue"
+        jobservice:
+          replicas: 1
+          secret: "coresecretvalue"
+          strategy:
+            type: Recreate
+        registry:
+          replicas: 1
+          strategy:
+            type: Recreate
+        secretKey: "abcdefgh12345678"
   destination:
     server: https://kubernetes.default.svc
     namespace: harbor
